@@ -13,9 +13,7 @@ class NanoBotEnv(gym.Env):
         # Action: Magnetic Force X, Y
         self.action_space = spaces.Box(low=-1.0, high=1.0, shape=(2,), dtype=np.float32)
 
-        # --- THE BIG CHANGE: SENSORS NOT COORDINATES ---
-        # The AI no longer knows WHERE the target is.
-        # It only knows: [My_X, My_Y, Concentration_Center, Concentration_Left, Concentration_Right]
+        # The AI only knows: [My_X, My_Y, Concentration_Center, Concentration_Left, Concentration_Right]
         # It has to compare these 3 numbers to figure out which way is "Pain"
         self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(5,), dtype=np.float32)
 
@@ -95,8 +93,9 @@ class NanoBotEnv(gym.Env):
         pos_right = self.bot_pos + np.array([2.0, 0.0])
         signal_right = self._get_pain_concentration(pos_right)
         
-        # Notice: target_pos is NOT returned here. The AI is blind to the location.
+        # Notice: target_pos is not returned here. The AI is blind to the location.
         return np.array([
             self.bot_pos[0], self.bot_pos[1], 
             signal_center, signal_left, signal_right
+
         ], dtype=np.float32)
