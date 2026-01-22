@@ -22,7 +22,7 @@ while not done:
     path_y.append(obs[1])
 
 # 3. Create the Scent Map (The Background)
-# We create a grid of 100x100 points and calculate the smell at every point
+# Grid of 100x100 points and calculate the smell at every point
 x = np.linspace(0, 100, 100)
 y = np.linspace(0, 100, 100)
 X, Y = np.meshgrid(x, y)
@@ -52,4 +52,5 @@ plt.text(12, 80, "Blood Flow", color='grey')
 
 plt.legend()
 plt.grid(True, alpha=0.3)
+
 plt.show()
